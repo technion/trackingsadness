@@ -1,4 +1,7 @@
-!(function(a, b) {
+  var a = {};
+  var b = function() {
+    return this;
+  };
   var c = function(a) {
     function b(a) {
       return c() + "-" + d() + "-" + e() + "-" + f() + "-" + g(a);
@@ -528,10 +531,3 @@
       window._trfq.process();
   })();
   b.true = a;
-})(
-  {},
-  (function() {
-    return this;
-  })()
-);
-//# sourceMappingURL=tcc_l.combined.1.0.6.min.js.map
