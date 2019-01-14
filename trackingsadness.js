@@ -1,64 +1,22 @@
-  var a = {};
-  var b = function() {
-    return this;
-  };
-  var c = function(a) {
-    function b(a) {
-      return c() + "-" + d() + "-" + e() + "-" + f() + "-" + g(a);
-    }
-    function c() {
-      var a = new Date(),
-        b = Math.round(a.getTime() / 1e3); //to seconds rounded
-      (b = parseInt(b.toString().slice(1))), //remove leading precision .. todo: substring
-        (b = b.toString(16)), //to hex
-        //should never exceed 8.. sanity check
-        b.length > 8 && (b = b.substring(0, 8));
-      b = "00000000" + b; //zero pad the value so 1234567 = 01234567
-      var c = b.length - 8; //make sure we output time + random if we are less than 8 characters
-      return (b = b.substring(c));
-    }
-    //second guid fragment .. use MS time from EPOCH
-    function d() {
-      var a = new Date(),
-        b = a.getTime(); //get time in MS
-      return (b = b.toString()), (b = b.substr(b.length - 4));
-    }
-    //third segment is '4' + 3 random characters
-    function e() {
-      return "4" + h(3);
-    }
-    //fourth segment is [8,9,a,b]{1} + 3 random characters
-    function f() {
-      return h(1, "89ab") + h(3);
-    }
-    //fifth segment is either 0+Random(11) or 1+Hash(Shopper)+Random(3)
-    function g(a) {
-      if (a) {
-        var b = i(a);
-        b && b.length > 8 && (b = b.substr(0, 8));
-        return ("1" + b + h(11)).substr(0, 12);
-      }
-      return "0" + h(11);
-    }
-    function h(a, b) {
-      var c = "";
-      b || (b = "abcdef0123456789");
-      for (var d = 0; d < a; d++)
-        c += b.charAt(Math.floor(Math.random() * b.length));
-      return c;
-    }
-    function i(a) {
-      for (var b = 0, c = 0, d = a.length; c < d; c++)
-        b = (31 * b + a.charCodeAt(c)) << 0;
-      return (b = Math.abs(b)), b.toString(16);
-    }
-    return (
-      a || (a = {}),
-      a.debugMode
-        ? { hashString: i, getFirstSegment: c, generateGuid: b, hashCode: i }
-        : { generateGuid: b }
-    );
-  };
+function uuidv4() {
+  // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+  });
+}
+
+var a = {};
+var b = function() {
+  return this;
+};
+var c = function(a) {
+  return (
+    a || (a = {}),
+      { generateGuid: uuidv4 }
+  );
+};
+
   void 0 !== b &&
     //node testability hack
     (b.tcg = c);
