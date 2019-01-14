@@ -144,7 +144,7 @@ var d = (function(a) {
   } /* eslint-disable no-console */
   function _debug() {
     // or true
-    (a.debugMode || !1) && console && console.log.apply && console.firebug;
+    (a.debugMode || 1) && console && console.log.apply && console.firebug;
   }
   function _isArray(a) {
     return "object" == typeof a && a instanceof Array;
@@ -343,6 +343,11 @@ var trackrun = function(a) {
     (a.version = "1.0.6"),
     (a.trfdData = []);
   var b = function(a) {
+      var h = a.hasOwnProperty("version") ? a.version : "not.set",
+        i = a.hasOwnProperty("baseHost") ? a.baseHost : "godaddy.com",
+        j = a.hasOwnProperty("imgSitePath") ? a.imgSitePath : "/t/1/tl/event",
+        k = a.utility.getBeaconEndpoint(i, j),
+        m = a.hasOwnProperty("trfdData") ? a.trfdData : {};
       function b(b) {
         var c = new a.utility.eventObject();
         c.merge(b), c.set("ht", "perf"), e(c, "perf", function() {});
@@ -365,7 +370,6 @@ var trackrun = function(a) {
           g.set("eid", c),
           d && g.set("usrin", a.utility.usrinToString(d)),
           f && g.merge(f),
-          // generic log events are still making image requests
           e(g, h, function() {});
       }
       function e(b, c, d) {
@@ -377,7 +381,7 @@ var trackrun = function(a) {
         b.set("dh", a.utility.getHostname()),
           b.set("dr", a.utility.getReferrer(1e3)),
           b.set("ua", a.utility.getUserAgent()),
-          b.set("vci", l),
+          b.set("vci", a.utility.rand()),
           b.set("cv", h),
           b.set("z", a.utility.rand()),
           b.set("vg", j),
@@ -416,12 +420,6 @@ var trackrun = function(a) {
           { visitor: b, visit: c }
         );
       }
-      var h = a.hasOwnProperty("version") ? a.version : "not.set",
-        i = a.hasOwnProperty("baseHost") ? a.baseHost : "godaddy.com",
-        j = a.hasOwnProperty("imgSitePath") ? a.imgSitePath : "/t/1/tl/event",
-        k = a.utility.getBeaconEndpoint(i, j),
-        l = a.utility.rand(),
-        m = a.hasOwnProperty("trfdData") ? a.trfdData : {};
       return a.debugMode, { cmdLogEvent: d, cmdLogPerf: b, cmdLogPage: c };
     },
     f = function() {
