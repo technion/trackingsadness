@@ -148,7 +148,7 @@ var c = function(a) {
       );
     }
     function _getReferrer(b) {
-      return o("referrer:" + a.doc.referrer), a.doc.referrer.substr(0, b);
+      return _debug("referrer:" + a.doc.referrer), a.doc.referrer.substr(0, b);
     }
     function _getCurrentUtcTimestamp() {
       return Math.round(new Date().getTime());
