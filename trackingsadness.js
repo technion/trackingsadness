@@ -17,11 +17,8 @@ var c = function(a) {
   );
 };
 
-  void 0 !== b &&
-    //node testability hack
-    (b.tcg = c);
   var d = (function(a) {
-    function b() {
+    function _getISODate() {
       return (
         Date.prototype.toISOString ||
           (function() {
@@ -54,7 +51,7 @@ var c = function(a) {
         new Date().toISOString()
       );
     }
-    function c(a, b) {
+    function _rand(a, b) {
       var c = arguments.length;
       if (0 === c) (a = 0), (b = 2147483647);
       else if (1 === c)
@@ -63,7 +60,7 @@ var c = function(a) {
         );
       return Math.floor(Math.random() * (b - a + 1)) + a;
     }
-    function d(a, b) {
+    function _createRequestUrl(a, b) {
       var c = w;
       return (
         (c.queryString = e(a, "tccl.")),
@@ -95,11 +92,11 @@ var c = function(a) {
       //protocol-less
       return "//img." + a;
     }
-    function g(a, b) {
+    function _getBeaconEndpoint(a, b) {
       return f(a) + b;
     }
-    function h(a, b) {
-      for (var c = new i(), d = 0; d < a.length; d++)
+    function _getDataLayerValues(a, b) {
+      for (var c = new _eventObject(), d = 0; d < a.length; d++)
         for (var e in a[d])
           if (a[d].hasOwnProperty(e)) {
             if (b && 0 === e.indexOf("tccl.")) continue;
@@ -107,7 +104,7 @@ var c = function(a) {
           }
       return c;
     }
-    function i() {
+    function _eventObject() {
       (this.properties = {}),
         (this.id = ""),
         (this.properties.cts = new Date().getTime()),
@@ -133,13 +130,13 @@ var c = function(a) {
           if (this.properties.hasOwnProperty(a)) return !0;
         });
     }
-    function j() {
+    function _getUserAgent() {
       return a.window.navigator.userAgent;
     }
-    function k() {
+    function _getHostname() {
       return a.window.location.hostname;
     }
-    function l(b) {
+    function _getPageName(b) {
       return (
         b || (b = a.window.location.pathname),
         "string" != typeof b || void 0 === b || "" === b
@@ -150,20 +147,20 @@ var c = function(a) {
             b)
       );
     }
-    function m(b) {
+    function _getReferrer(b) {
       return o("referrer:" + a.doc.referrer), a.doc.referrer.substr(0, b);
     }
-    function n() {
+    function _getCurrentUtcTimestamp() {
       return Math.round(new Date().getTime());
     } /* eslint-disable no-console */
-    function o() {
+    function _debug() {
       // or true
       (a.debugMode || !1) && console && console.log.apply && console.firebug;
     }
-    function p(a) {
+    function _isArray(a) {
       return "object" == typeof a && a instanceof Array;
     }
-    function q(a, b, c, d, e, f, g) {
+    function _setCookie(a, b, c, d, e, f, g) {
       var h = new Date();
       h.setTime(h.getTime() + 60 * d * 1e3);
       var i =
@@ -177,7 +174,7 @@ var c = function(a) {
         (g ? "; secure" : "");
       a.cookie = i;
     }
-    function r(a, b, c, d, e) {
+    function _findCookie(a, b, c, d, e) {
       (c = []), "string" == typeof (d = a.cookie) && (c = d.split("; "));
       var f = {};
       for (e = c.length - 1; e >= 0; e--) {
@@ -191,7 +188,7 @@ var c = function(a) {
       }
       return f[b];
     }
-    function s(a, b) {
+    function _getCookieValues(a, b) {
       // return the value of the cookie if found.
       var c = this.findCookie(a, b),
         d = {};
@@ -202,20 +199,20 @@ var c = function(a) {
         }
       return d;
     }
-    function t(a, b, c) {
+    function _getCookieValue(a, b, c) {
       var d = this.getCookieValues(a, b);
       if (d.hasOwnProperty(c)) return d[c];
     }
-    function u(a, b) {
+    function _checkCookiesEnabled(a, b) {
       var c = !!b.cookieEnabled;
       return (
         void 0 !== b.cookieEnabled ||
           c ||
-          (q(a, "testcookie"), (c = a.cookie.indexOf("testcookie") !== -1)),
+          (_setCookie(a, "testcookie"), (c = a.cookie.indexOf("testcookie") !== -1)),
         c
       );
     }
-    function v(a) {
+    function _usrinToString(a) {
       if ("object" == typeof a && p(a)) {
         for (var b = "", c = 0; c < a.length; c++)
           c > 0 && (b += "^"), p(a[c]) && (b += a[c][0] + "," + a[c][1]);
@@ -235,25 +232,25 @@ var c = function(a) {
       }
     };
     return {
-      getDataLayerValues: h,
-      getUserAgent: j,
-      getHostname: k,
-      getPageName: l,
-      eventObject: i,
-      createRequestUrl: d,
-      getReferrer: m,
-      getISODate: b,
-      rand: c,
-      getBeaconEndpoint: g,
-      getCurrentUtcTimestamp: n,
-      debug: o,
-      isArray: p,
-      getCookieValues: s,
-      getCookieValue: t,
-      checkCookiesEnabled: u,
-      setCookie: q,
-      findCookie: r,
-      usrinToString: v
+      getDataLayerValues: _getDataLayerValues,
+      getUserAgent: _getUserAgent,
+      getHostname: _getHostname,
+      getPageName: _getPageName,
+      eventObject: _eventObject,
+      createRequestUrl: _createRequestUrl,
+      getReferrer: _getReferrer,
+      getISODate: _getISODate,
+      rand: _rand,
+      getBeaconEndpoint: _getBeaconEndpoint,
+      getCurrentUtcTimestamp: _getCurrentUtcTimestamp,
+      debug: _debug,
+      isArray: _isArray,
+      getCookieValues: _getCookieValues,
+      getCookieValue: _getCookieValue,
+      checkCookiesEnabled: _checkCookiesEnabled,
+      setCookie: _setCookie,
+      findCookie: _findCookie,
+      usrinToString: _usrinToString
     };
   })();
   if (!e)
@@ -342,9 +339,6 @@ var c = function(a) {
         { getPerformanceData: b }
       );
     };
-  void 0 !== b &&
-    //node testability hack
-    (b.tcp = e);
   !(function(a) {
     // eslint-disable-line no-unused-vars
     a || (a = {}),
